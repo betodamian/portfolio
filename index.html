@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Beto Damian — Machine Learning Engineer</title>
+<meta name="description" content="Beto Damian — Machine Learning Engineer building and scaling large models and ML systems. Currently developing genomic foundation models at Lawrence Berkeley National Lab." />
+<meta property="og:title" content="Beto Damian — Machine Learning Engineer" />
+<meta property="og:description" content="Building and scaling large models and ML systems. Genomic foundation models at Lawrence Berkeley National Lab." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --bg:#0a0a0b;
+    --bg-2:#111113;
+    --line:rgba(255,255,255,0.09);
+    --line-strong:rgba(255,255,255,0.18);
+    --fg:#f4f4f2;
+    --fg-2:#a2a2a4;
+    --fg-3:#5f5f64;
+    --accent:#ff7a18;
+    --max:1180px;
+    --pad:clamp(1.25rem, 5vw, 4rem);
+    --display:"Space Grotesk", system-ui, sans-serif;
+    --body:"IBM Plex Sans", system-ui, sans-serif;
+    --mono:"IBM Plex Mono", ui-monospace, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--fg);
+    font-family:var(--body);
+    font-size:1.0625rem;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  a{color:inherit;text-decoration:none;}
+
+  .wrap{max-width:var(--max);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad);}
+
+  /* ---------- eyebrow / mono labels ---------- */
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:0.9rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--fg-3);
+    display:inline-flex;
+    align-items:center;
+    gap:0.6rem;
+  }
+  .eyebrow::before{
+    content:"";
+    width:1.6rem;height:1px;background:var(--line-strong);
+  }
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(10px);
+    background:color-mix(in srgb, var(--bg) 78%, transparent);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    height:64px;
+  }
+  .brand{font-family:var(--mono);font-size:0.8rem;letter-spacing:0.18em;color:var(--fg);}
+  .nav-links{display:flex;gap:2rem;font-family:var(--mono);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-2);}
+  .nav-links a{transition:color .2s ease;}
+  .nav-links a:hover{color:var(--fg);}
+  @media (max-width:640px){ .nav-links{display:none;} }
+
+  /* ---------- hero ---------- */
+  .hero{padding-top:clamp(4rem,12vh,9rem);padding-bottom:clamp(3.5rem,8vh,6rem);}
+  .hero-grid{display:grid;grid-template-columns:1.5fr 0.85fr;gap:clamp(2rem,5vw,4.5rem);align-items:center;}
+  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr;} }
+
+  h1.name{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(3.2rem,12vw,8.5rem);
+    line-height:0.92;
+    letter-spacing:-0.03em;
+    margin:1.4rem 0 0;
+  }
+  h1.name > span{display:block;}
+  h1.name .ln2{color:var(--fg-2);}
+
+  .tagline{
+    margin:1.8rem 0 0;
+    max-width:46ch;
+    color:var(--fg-2);
+    font-size:clamp(1.02rem,1.6vw,1.18rem);
+    line-height:1.55;
+  }
+  .tagline strong{color:var(--fg);font-weight:500;}
+
+  /* signature: autoregressive DNA token stream */
+  .seq-block{margin-top:2rem;}
+  .seq-label{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--fg-3);}
+  #seq{
+    font-family:var(--mono);
+    font-size:0.82rem;
+    letter-spacing:0.32em;
+    color:var(--fg-3);
+    margin-top:0.5rem;
+    height:1.4em;overflow:hidden;white-space:nowrap;
+    border-left:2px solid var(--line-strong);
+    padding-left:0.8rem;
+  }
+  #seq .cursor{color:var(--fg);animation:blink 1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  .cta-row{display:flex;flex-wrap:wrap;gap:0.9rem;margin-top:2.4rem;}
+  .btn{
+    font-family:var(--mono);font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;
+    padding:0.85rem 1.4rem;border:1px solid var(--line-strong);border-radius:2px;
+    transition:background .2s ease,color .2s ease,border-color .2s ease;
+    display:inline-flex;align-items:center;gap:0.5rem;
+  }
+  .btn:hover{background:var(--fg);color:var(--bg);border-color:var(--fg);}
+  .btn.ghost{border-color:var(--line);color:var(--fg-2);}
+  .btn.ghost:hover{background:transparent;color:var(--fg);border-color:var(--fg);}
+
+  .portrait{position:relative;}
+  .portrait img{
+    width:100%;display:block;border-radius:3px;
+    border:1px solid var(--line);
+    aspect-ratio:4/5;
+    object-fit:cover;
+    object-position:50% 30%;
+  }
+  .portrait .ph{
+    width:100%;aspect-ratio:4/5;border:1px solid var(--line);border-radius:3px;
+    background:
+      radial-gradient(120% 120% at 70% 10%, rgba(255,255,255,0.05), transparent 55%),
+      var(--bg-2);
+    display:grid;place-items:center;
+    font-family:var(--display);font-weight:700;font-size:3rem;color:var(--fg-3);letter-spacing:0.05em;
+  }
+  @media (max-width:860px){ .portrait{max-width:320px;} }
+
+  /* ---------- section frame ---------- */
+  section.block{padding-top:clamp(4rem,9vh,7rem);padding-bottom:clamp(1rem,3vh,2rem);border-top:1px solid var(--line);}
+  .sec-head{margin-bottom:2.6rem;}
+  .sec-head h2{
+    font-family:var(--display);font-weight:500;
+    font-size:clamp(1.7rem,4vw,2.6rem);letter-spacing:-0.02em;margin:1rem 0 0;
+  }
+  .sec-head p{color:var(--fg-2);margin:0.9rem 0 0;max-width:60ch;}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,4rem);}
+  @media (max-width:760px){ .about-grid{grid-template-columns:1fr;} }
+  .about-grid p{margin:0 0 1.1rem;color:var(--fg-2);}
+  .about-grid p strong{color:var(--fg);font-weight:500;}
+
+  /* ---------- experience ---------- */
+  .job{display:grid;grid-template-columns:0.4fr 1fr;gap:clamp(1rem,3vw,3rem);padding:2.2rem 0;border-top:1px solid var(--line);}
+  .job:first-of-type{border-top:none;}
+  @media (max-width:760px){ .job{grid-template-columns:1fr;gap:0.8rem;} }
+  .job-meta .role{font-family:var(--display);font-weight:500;font-size:1.2rem;}
+  .job-meta .org{color:var(--fg-2);font-size:0.95rem;margin-top:0.35rem;}
+  .job-meta .when{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.12em;color:var(--fg-3);margin-top:0.5rem;text-transform:uppercase;}
+  .job ul{margin:0;padding:0;list-style:none;}
+  .job li{position:relative;padding-left:1.3rem;margin-bottom:0.9rem;color:var(--fg-2);}
+  .job li:last-child{margin-bottom:0;}
+  .job li::before{content:"›";position:absolute;left:0;color:var(--fg-3);font-family:var(--mono);}
+  .job li b{color:var(--fg);font-weight:500;}
+
+  /* ---------- projects ---------- */
+  .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+  @media (max-width:680px){ .proj-grid{grid-template-columns:1fr;} }
+  .card{background:var(--bg);padding:clamp(1.6rem,3vw,2.4rem);display:flex;flex-direction:column;min-height:230px;transition:background .25s ease;}
+  .card:hover{background:var(--bg-2);}
+  .card h3{font-family:var(--display);font-weight:500;font-size:1.35rem;margin:0;letter-spacing:-0.01em;}
+  .card p{color:var(--fg-2);margin:0.8rem 0 1.4rem;font-size:0.97rem;flex:1;}
+  .tags{display:flex;flex-wrap:wrap;gap:0.4rem;}
+  .tag{font-family:var(--mono);font-size:0.66rem;letter-spacing:0.06em;color:var(--fg-3);border:1px solid var(--line);padding:0.28rem 0.55rem;border-radius:2px;}
+
+  /* ---------- skills ---------- */
+  .skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,4vw,3rem);}
+  @media (max-width:760px){ .skill-grid{grid-template-columns:1fr;gap:2rem;} }
+  .skill-col h4{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--fg-3);margin:0 0 1.1rem;font-weight:500;}
+  .skill-col ul{list-style:none;margin:0;padding:0;}
+  .skill-col li{padding:0.55rem 0;border-bottom:1px solid var(--line);color:var(--fg);font-size:0.97rem;}
+  .skill-col li:last-child{border-bottom:none;}
+
+  /* ---------- contact ---------- */
+  .contact{padding-top:clamp(5rem,11vh,8rem);padding-bottom:clamp(5rem,11vh,8rem);border-top:1px solid var(--line);text-align:center;}
+  .contact .big{font-family:var(--display);font-weight:500;font-size:clamp(2rem,6vw,4rem);letter-spacing:-0.02em;line-height:1.05;margin:1.4rem auto 0;max-width:18ch;}
+  .contact .big a{border-bottom:1px solid var(--line-strong);transition:border-color .2s ease;}
+  .contact .big a:hover{border-color:var(--fg);}
+  .contact-links{display:flex;justify-content:center;gap:2rem;margin-top:2.6rem;font-family:var(--mono);font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-2);flex-wrap:wrap;}
+  .contact-links a{display:inline-flex;align-items:center;gap:0.5rem;transition:color .2s ease;}
+  .contact-links a:hover{color:var(--fg);}
+
+  footer{border-top:1px solid var(--line);padding:2rem 0;}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;color:var(--fg-3);text-transform:uppercase;flex-wrap:wrap;gap:0.8rem;}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    #seq .cursor{animation:none;}
+    .char{transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  :focus-visible{outline:2px solid var(--fg);outline-offset:3px;}
+
+  /* ---------- interactive letters ---------- */
+  .char{ transition:color .7s ease; }
+  .char:hover{ color:var(--accent); transition-duration:0s; }
+  .char.flash{ color:var(--accent); transition-duration:0s; }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">BETO&nbsp;DAMIAN</a>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Machine Learning Engineer</span>
+        <h1 class="name"><span>BETO</span><span class="ln2">DAMIAN</span></h1>
+        <p class="tagline">Building and scaling large models and ML systems. Currently developing <strong>genomic foundation models</strong> at Lawrence Berkeley National Lab.</p>
+
+        <div class="seq-block">
+          <div class="seq-label">// autoregressive sample · genomeocean</div>
+          <div id="seq" aria-hidden="true">ACGTTGGCAATCGGATCCGTA<span class="cursor">▍</span></div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn" href="mailto:bdamian6657@gmail.com">Get in touch</a>
+          <a class="btn ghost" href="#work">View projects</a>
+        </div>
+      </div>
+
+      <div class="portrait">
+        <!-- Drop your headshot in this folder as profile.jpg to replace the monogram. -->
+        <img src="profile.jpg" alt="Beto Damian"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='grid';" />
+        <div class="ph" style="display:none;">BD</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="block" id="about">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">About</span>
+        <h2>UC Berkeley Data Science</h2>
+      </div>
+      <div class="about-grid reveal">
+        <div>
+          <p>I work on <strong>ML systems and large-model scaling</strong> — the unglamorous machinery that makes big models train and serve fast: inference pipelines, distributed training, and transformer internals.</p>
+          <p>Right now that means <strong>genomic foundation models</strong> at the Joint Genome Institute, where I build generation and evaluation pipelines for autoregressive models that produce DNA one token at a time.</p>
+        </div>
+        <div>
+          <p>My focus is robust, high-performance inference and training — squeezing throughput out of attention kernels and quantization, and keeping multi-GPU jobs honest on HPC clusters.</p>
+          <p>Outside research I teach programming, and I tinker with networking and hands-on computing for fun. I'm graduating in <strong>December 2026</strong> and open to ML engineering roles.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="block" id="experience">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Experience</span>
+        <h2>Where I've been working</h2>
+      </div>
+
+      <div class="reveal">
+        <div class="job">
+          <div class="job-meta">
+            <div class="role">ML Research Intern</div>
+            <div class="org">Lawrence Berkeley National Laboratory · Joint Genome Institute · Berkeley, CA</div>
+            <div class="when">May 2026 — Present</div>
+          </div>
+          <ul>
+            <li>Developing and evaluating large genomic models like <b>GenomeOcean</b>, an autoregressive transformer that generates DNA token-by-token.</li>
+            <li>Built generation and evaluation pipelines using LLM sampling strategies and naturalness scoring across <b>1M+ sequences</b>, improving F1 by 250%.</li>
+            <li>Optimized inference with <b>FlashAttention-2</b> and 4-bit quantization (+125% throughput); scaled training across <b>20 GPUs</b> on the Lawrencium HPC cluster.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-meta">
+            <div class="role">Programming Instructor</div>
+            <div class="org">The Coder School · California</div>
+            <div class="when">Jul 2022 — Present</div>
+          </div>
+          <ul>
+            <li>Teaching programming and software design to <b>30+ students</b> across 3 locations, building 60 reusable Python and JavaScript project codebases.</li>
+            <li>Developing curriculum modules on foundational coding principles and modern software architecture for beginner learners.</li>
+            <li>Providing technical mentorship and debugging support, fostering a collaborative environment for technical growth.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="block" id="work">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Selected Work</span>
+        <h2>Projects</h2>
+        <p>Engineering scalable ML systems and foundation models at the intersection of computer vision and large language models.</p>
+      </div>
+
+      <div class="proj-grid reveal">
+        <article class="card">
+          <h3>CalCritters</h3>
+          <p>Interactive campus ARG where students scan QR codes to meet LLM-driven characters. Reached 150+ active users.</p>
+          <div class="tags"><span class="tag">React</span><span class="tag">Python</span><span class="tag">Azure SQL</span><span class="tag">Azure Bot Service</span><span class="tag">Cloudflare</span></div>
+        </article>
+
+        <article class="card">
+          <h3>AI-Powered Tutoring Note Assistant</h3>
+          <p>Chrome extension that turns tutor notes into structured session summaries via the Gemini API. Saved ~10 min/session for 20+ tutors.</p>
+          <div class="tags"><span class="tag">Chrome Extensions</span><span class="tag">Gemini API</span><span class="tag">JavaScript</span></div>
+        </article>
+
+        <article class="card">
+          <h3>Real-Time ONNX Hand Tracking</h3>
+          <p>Real-time computer-vision system tracking 21 hand landmarks at 120 FPS — with no MediaPipe dependency.</p>
+          <div class="tags"><span class="tag">ONNX Runtime</span><span class="tag">OpenCV</span><span class="tag">Python</span></div>
+        </article>
+
+        <article class="card">
+          <h3>Zonez</h3>
+          <p>Web app that aggregates student availability across time zones to visualize overlapping study windows. Helped 50+ students coordinate.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Web App</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="block" id="skills">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Toolkit</span>
+        <h2>Key skills</h2>
+      </div>
+      <div class="skill-grid reveal">
+        <div class="skill-col">
+          <h4>Languages</h4>
+          <ul><li>Python</li><li>C++</li><li>C</li><li>Java</li><li>SQL</li><li>JavaScript</li></ul>
+        </div>
+        <div class="skill-col">
+          <h4>ML &amp; Modeling</h4>
+          <ul><li>PyTorch</li><li>Hugging Face Transformers</li><li>ONNX Runtime</li><li>NumPy · Pandas</li><li>Transformer Architectures</li><li>Quantization (GPTQ/AWQ/GGUF)</li></ul>
+        </div>
+        <div class="skill-col">
+          <h4>DevOps</h4>
+          <ul><li>AWS · Azure</li><li>HPC Clusters (SLURM)</li><li>CUDA · Linux/SSH</li><li>Git · REST APIs</li><li>Node.js · React</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <span class="eyebrow" style="justify-content:center;">Open to ML engineering roles</span>
+      <div class="big">Let's <a href="mailto:betodamian@berkeley.edu">talk</a>.</div>
+      <div class="contact-links">
+        <a href="mailto:betodamian@berkeley.edu">betodamian@berkeley.edu</a>
+        <a href="https://linkedin.com/in/betodamian" target="_blank" rel="noopener">linkedin.com/in/betodamian</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span>© 2026 Beto Damian</span>
+    <span>Built &amp; hosted independently</span>
+  </div>
+</footer>
+
+<script>
+  // Signature: autoregressive DNA token generation
+  (function(){
+    var el = document.getElementById('seq');
+    if(!el) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var bases = ['A','C','G','T'];
+    var maxLen = 30;
+    var buf = 'ACGTTGGCAATCGGATCCGTA'.split('');
+    function render(){
+      el.innerHTML = buf.join('') + '<span class="cursor">▍</span>';
+    }
+    if(reduce){ render(); return; }
+    setInterval(function(){
+      buf.push(bases[Math.floor(Math.random()*4)]);
+      if(buf.length > maxLen) buf.shift();
+      render();
+    }, 110);
+  })();
+
+  // Subtle scroll reveal
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var items = document.querySelectorAll('.reveal');
+    if(reduce || !('IntersectionObserver' in window)){
+      items.forEach(function(i){ i.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold:0.12 });
+    items.forEach(function(i){ io.observe(i); });
+  })();
+
+  // Interactive letters: hover turns a letter orange (then it fades back);
+  // clicking a letter sends an orange shockwave radiating out to the others.
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var HOLD = 90;     // ms a flashed letter stays orange before it starts fading
+    var SPEED = 1.2;   // ms of delay per px of distance — controls wave speed
+    var roots = [document.querySelector('main'), document.querySelector('header.nav'), document.querySelector('footer')];
+    var SKIP_TAG = { SCRIPT:1, STYLE:1, NOSCRIPT:1 };
+
+    // Elements we must NOT split into letters (flex/grid containers with gaps,
+    // the animated DNA stream, the photo placeholder) — splitting them would break layout.
+    function skip(el){
+      if(SKIP_TAG[el.tagName]) return true;
+      if(el.id === 'seq') return true;
+      var cl = el.classList;
+      return !!(cl && (cl.contains('seq-label') ||
+        cl.contains('ph') || cl.contains('btn') || cl.contains('contact-links') || cl.contains('char')));
+    }
+
+    // The eyebrow labels are flex containers with a gap; splitting their text into
+    // many letter-spans would scatter the letters. So we first tuck their content into
+    // ONE inline wrapper (a single flex child), then split letters inside that wrapper.
+    function isGroup(el){ return !!(el.classList && el.classList.contains('eyebrow')); }
+
+    function wrap(el){
+      Array.prototype.slice.call(el.childNodes).forEach(function(node){
+        if(node.nodeType === 3){ // text node
+          if(!/\S/.test(node.nodeValue)) return;
+          var frag = document.createDocumentFragment();
+          var text = node.nodeValue;
+          for(var i=0;i<text.length;i++){
+            var ch = text[i];
+            if(/\s/.test(ch)){ frag.appendChild(document.createTextNode(ch)); }
+            else { var s = document.createElement('span'); s.className = 'char'; s.textContent = ch; frag.appendChild(s); }
+          }
+          el.replaceChild(frag, node);
+        } else if(node.nodeType === 1 && !skip(node)){
+          if(isGroup(node)){
+            var box = document.createElement('span');
+            while(node.firstChild){ box.appendChild(node.firstChild); }
+            node.appendChild(box);
+            wrap(box);
+          } else {
+            wrap(node);
+          }
+        }
+      });
+    }
+    roots.forEach(function(r){ if(r) wrap(r); });
+
+    if(reduce) return; // hover colour still works via CSS; skip the moving shockwave
+
+    var chars = Array.prototype.slice.call(document.querySelectorAll('.char'));
+    function flash(el){
+      el.classList.add('flash');
+      setTimeout(function(){ el.classList.remove('flash'); }, HOLD);
+    }
+    document.addEventListener('click', function(e){
+      var t = e.target;
+      if(!(t.classList && t.classList.contains('char'))) return;
+      var r = t.getBoundingClientRect();
+      var ox = r.left + r.width/2, oy = r.top + r.height/2;
+      var vw = window.innerWidth, vh = window.innerHeight;
+      flash(t);
+      chars.forEach(function(c){
+        if(c === t) return;
+        var cr = c.getBoundingClientRect();
+        if(cr.bottom < 0 || cr.top > vh || cr.right < 0 || cr.left > vw) return; // only ripple visible letters
+        var dx = cr.left + cr.width/2 - ox, dy = cr.top + cr.height/2 - oy;
+        setTimeout(function(){ flash(c); }, Math.sqrt(dx*dx + dy*dy) * SPEED);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
