@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Beto Damian — Machine Learning Engineer</title>
-<meta name="description" content="Beto Damian — Machine Learning Engineer building and scaling large models and ML systems. Currently developing genomic foundation models at Lawrence Berkeley National Lab." />
-<meta property="og:title" content="Beto Damian — Machine Learning Engineer" />
+<title>Beto Damian · Machine Learning Engineer</title>
+<meta name="description" content="Beto Damian, Machine Learning Engineer. Building and scaling large models and ML systems. Currently developing genomic foundation models at Lawrence Berkeley National Lab." />
+<meta property="og:title" content="Beto Damian · Machine Learning Engineer" />
 <meta property="og:description" content="Building and scaling large models and ML systems. Genomic foundation models at Lawrence Berkeley National Lab." />
 <meta property="og:type" content="website" />
 
@@ -278,12 +278,12 @@
       </div>
       <div class="about-grid reveal">
         <div>
-          <p>I work on <strong>ML systems and large-model scaling</strong> — the unglamorous machinery that makes big models train and serve fast: inference pipelines, distributed training, and transformer internals.</p>
-          <p>Right now that means <strong>genomic foundation models</strong> at the Joint Genome Institute, where I build generation and evaluation pipelines for autoregressive models that produce DNA one token at a time.</p>
+          <p>I work on <strong>ML systems and large-model scaling</strong>: inference optimization, distributed training, and transformer architectures.</p>
+          <p>Right now I'm at the Joint Genome Institute working on <strong>GenomeOcean</strong>, building generation and evaluation pipelines from scratch.</p>
         </div>
         <div>
-          <p>My focus is robust, high-performance inference and training — squeezing throughput out of attention kernels and quantization, and keeping multi-GPU jobs honest on HPC clusters.</p>
-          <p>Outside research I teach programming, and I tinker with networking and hands-on computing for fun. I'm graduating in <strong>December 2026</strong> and open to ML engineering roles.</p>
+          <p>I focus on high-performance inference and training: FlashAttention kernels, quantization, and multi-GPU scaling on HPC clusters.</p>
+          <p>Outside of work I make video games and produce music. I'm graduating in <strong>December 2026</strong> and open to ML engineering roles.</p>
         </div>
       </div>
     </div>
@@ -302,10 +302,10 @@
           <div class="job-meta">
             <div class="role">ML Research Intern</div>
             <div class="org">Lawrence Berkeley National Laboratory · Joint Genome Institute · Berkeley, CA</div>
-            <div class="when">May 2026 — Present</div>
+            <div class="when">May 2026 - Present</div>
           </div>
           <ul>
-            <li>Developing and evaluating large genomic models like <b>GenomeOcean</b>, an autoregressive transformer that generates DNA token-by-token.</li>
+            <li>Developing and evaluating <b>GenomeOcean</b>, a large genomic foundation model, including generation and evaluation pipelines.</li>
             <li>Built generation and evaluation pipelines using LLM sampling strategies and naturalness scoring across <b>1M+ sequences</b>, improving F1 by 250%.</li>
             <li>Optimized inference with <b>FlashAttention-2</b> and 4-bit quantization (+125% throughput); scaled training across <b>20 GPUs</b> on the Lawrencium HPC cluster.</li>
           </ul>
@@ -315,7 +315,7 @@
           <div class="job-meta">
             <div class="role">Programming Instructor</div>
             <div class="org">The Coder School · California</div>
-            <div class="when">Jul 2022 — Present</div>
+            <div class="when">Jul 2022 - Present</div>
           </div>
           <ul>
             <li>Teaching programming and software design to <b>30+ students</b> across 3 locations, building 60 reusable Python and JavaScript project codebases.</li>
@@ -351,7 +351,7 @@
 
         <article class="card">
           <h3>Real-Time ONNX Hand Tracking</h3>
-          <p>Real-time computer-vision system tracking 21 hand landmarks at 120 FPS — with no MediaPipe dependency.</p>
+          <p>Real-time computer-vision system tracking 21 hand landmarks at 120 FPS, no MediaPipe dependency.</p>
           <div class="tags"><span class="tag">ONNX Runtime</span><span class="tag">OpenCV</span><span class="tag">Python</span></div>
         </article>
 
@@ -449,12 +449,12 @@
   (function(){
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var HOLD = 90;     // ms a flashed letter stays orange before it starts fading
-    var SPEED = 1.2;   // ms of delay per px of distance — controls wave speed
+    var SPEED = 1.2;   // ms of delay per px of distance - controls wave speed
     var roots = [document.querySelector('main'), document.querySelector('header.nav'), document.querySelector('footer')];
     var SKIP_TAG = { SCRIPT:1, STYLE:1, NOSCRIPT:1 };
 
     // Elements we must NOT split into letters (flex/grid containers with gaps,
-    // the animated DNA stream, the photo placeholder) — splitting them would break layout.
+    // the animated DNA stream, the photo placeholder) - splitting them would break layout.
     function skip(el){
       if(SKIP_TAG[el.tagName]) return true;
       if(el.id === 'seq') return true;
